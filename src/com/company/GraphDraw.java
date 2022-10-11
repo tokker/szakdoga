@@ -6,12 +6,18 @@ import java.util.*;
 import java.awt.*;
 import javax.swing.*;
 
+class Pont{
+    int x, y;
+    public Pont(int x0, int y0){
+        x = x0;
+        y = y0;
+    }
+}
 public class GraphDraw extends JFrame {
     int width;
     int height;
-
     boolean megoldas = false;
-
+    ArrayList<Pont> foglalt;
     ArrayList<Node> nodes;
     ArrayList<edge> edges;
 
@@ -19,17 +25,9 @@ public class GraphDraw extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         nodes = new ArrayList<Node>();
         edges = new ArrayList<edge>();
-        width = 30;
-        height = 30;
-    }
-
-    public GraphDraw(String name) { //Construct with label
-        this.setTitle(name);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        nodes = new ArrayList<Node>();
-        edges = new ArrayList<edge>();
-        width = 30;
-        height = 30;
+        foglalt = new ArrayList<Pont>();
+        width = 40;
+        height = 40;
         JButton button = new JButton("Megoldás");
         button.addActionListener(new GombNyomas(this, button));
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -91,12 +89,22 @@ public class GraphDraw extends JFrame {
         this.repaint();
     }
 
+    public void kapacitas_foglalt(int x, int y){
+        for(int i = x-20; i < x+21; ++i){
+            for(int j = y-20; j < y+21; ++j){
+                foglalt.add(new Pont(i, j));
+            }
+        }
+    }
+
     public void paint(Graphics g) { // draw the nodes and edges
         super.paint(g);
+        foglalt.removeAll(foglalt);
         FontMetrics f = g.getFontMetrics();
         int nodeHeight = Math.max(height, f.getHeight());
 
         g.setColor(Color.black);
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 15));
         for (edge e : edges) {
             int i = 0, j = 0;
             for(Node n : nodes) {
@@ -115,24 +123,60 @@ public class GraphDraw extends JFrame {
             int y2 = (int) (y1 - (width/lineLength/2 * (y1-y0)));
             double offs = 28 * Math.PI / 180.0;
             double angle = Math.atan2(y0 - y2, x0 - x2);
-            int[] xs = { x2 + (int) (13 * Math.cos(angle + offs)), x2,
-                    x2 + (int) (13 * Math.cos(angle - offs)) };
-            int[] ys = { y2 + (int) (13 * Math.sin(angle + offs)), y2,
-                    y2 + (int) (13 * Math.sin(angle - offs)) };
+            int[] xs = { x2 + (int) (20 * Math.cos(angle + offs)), x2,
+                    x2 + (int) (20 * Math.cos(angle - offs)) };
+            int[] ys = { y2 + (int) (20 * Math.sin(angle + offs)), y2,
+                    y2 + (int) (20 * Math.sin(angle - offs)) };
 
             g.drawLine(x0, y0, x1, y1);
             g.drawPolyline(xs, ys, 3);
+
+            int xkap = x0 + (x1-x0)/2 + 1;
+            int ykap = y0 + (y1-y0)/2 + 1;
+            boolean talalt = false;
+            double xeltolas = ((double)Math.abs(x1-x0))/((double)(Math.abs(x1-x0)+Math.abs(y1-y0)));
+            double yeltolas = ((double)Math.abs(y1-y0))/((double)(Math.abs(x1-x0)+Math.abs(y1-y0)));
+            int eltolas = 1;
+            boolean xtengely = true;
+            while (!talalt && ((xkap-1<=x1 && xkap+1>=x0)||(xkap-1<=x0 && xkap+1>=x1)) && ((ykap-1<=y1 && ykap+1>=y0)||(ykap-1<=y0 && ykap+1>=y1))) {
+                boolean fogl = false;
+                for (Pont p:
+                     foglalt) {
+                    if (p.x == xkap && p.y == ykap) {
+                        fogl = true;
+                        break;
+                    }
+                }
+                if(fogl){
+                    if(xtengely)
+                        xkap += (int) (eltolas * xeltolas);
+                    else
+                        ykap += (int) (eltolas * yeltolas);
+                    if(eltolas < 0 && !xtengely)
+                        --eltolas;
+                    if (!xtengely)
+                        eltolas = -eltolas;
+                    xtengely = !xtengely;
+                }
+                else
+                    talalt = true;
+            }
+            if(!talalt){
+                xkap = x0 + (x1-x0)/2;
+                ykap = y0 + (y1-y0)/2;
+            }
+            g.setColor(Color.blue);
             if (megoldas)
-                g.drawString("(" + e.max + ")", x0 + (x1-x0)/2,
-                        y0 + (y1-y0)/2);
+                g.drawString("(" + e.max + ")", xkap, ykap);
             else
-                g.drawString("(" + e.kapacitas + ")", x0 + (x1-x0)/2,
-                    y0 + (y1-y0)/2);
+                g.drawString("(" + e.kapacitas + ")", xkap, ykap);
+            g.setColor(Color.black);
+            kapacitas_foglalt(xkap, ykap);
         }
 
         for (Node n : nodes) {
             int nodeWidth = Math.max(width, 1+width/2);
-            if(!megoldas || n.vagas == false)
+            if(!megoldas || !n.vagas)
                 g.setColor(Color.lightGray);
             else
                 g.setColor(Color.orange);
@@ -149,29 +193,30 @@ public class GraphDraw extends JFrame {
 }
 
 class testGraphDraw {
-    //Here is some example syntax for the GraphDraw class
     public static void draw(int sorokSzama, graf g, int csucsokSzama) {
-        GraphDraw frame = new GraphDraw("Test Window");
+        GraphDraw frame = new GraphDraw();
 
         int sorok = sorokSzama;
         if(sorokSzama %2 == 0)
             ++sorok;
 
-        int szelesseg =(csucsokSzama - 2)/sorokSzama * 100 + 200;
-        int magassag = sorok * 100;
+        int szelesseg =(csucsokSzama - 2)/sorokSzama * 150 + 300;
+        int magassag = sorok * 150;
         frame.setSize(szelesseg, magassag);
 
         frame.setVisible(true);
 
         for (int i = 0; i < sorok; ++i){
             for(int j = 0; j < (csucsokSzama-2)/sorokSzama + 2; ++j) {
-                if(g.csucsok[i][j] != ' ') {
+                if(graf.csucsok[i][j] != ' ') {
                     boolean vagas = false;
                     for(int k = 0; k < g.vagasCsucsSzam; ++k){
-                        if(g.vagas[k] == g.csucsok[i][j])
+                        if (g.vagas[k] == graf.csucsok[i][j]) {
                             vagas = true;
+                            break;
+                        }
                     }
-                    frame.addNode(g.csucsok[i][j], 50 + 100 * j, 50 + i * 100, vagas);
+                    frame.addNode(graf.csucsok[i][j], 75 + 150 * j, 75 + i * 150, vagas);
                 }
             }
         }
