@@ -85,15 +85,17 @@ public class graf {
                 elekSzama++;
                 elek.add(new el(csucsok[i][(csucsokSzama - 2) / sorokSzama], csucsok[(sorSzam-1)/2][(csucsokSzama - 2) / sorokSzama + 1], true));
                 elekSzama++;
-                x = r.nextInt(3);
-                if(x == 0){
-                    elek.add(new el(csucsok[(sorSzam-1)/2][0], csucsok[i][2], false));
-                    elekSzama++;
-                }
-                x = r.nextInt(3);
-                if(x == 0){
-                    elek.add(new el(csucsok[i][(csucsokSzama - 2) / sorokSzama - 1], csucsok[(sorSzam-1)/2][(csucsokSzama - 2) / sorokSzama + 1], false));
-                    elekSzama++;
+                if(Math.abs((sorSzam-1)/2-i) == 1) {
+                    x = r.nextInt(3);
+                    if (x == 0) {
+                        elek.add(new el(csucsok[(sorSzam - 1) / 2][0], csucsok[i][2], false));
+                        elekSzama++;
+                    }
+                    x = r.nextInt(3);
+                    if (x == 0) {
+                        elek.add(new el(csucsok[i][(csucsokSzama - 2) / sorokSzama - 1], csucsok[(sorSzam - 1) / 2][(csucsokSzama - 2) / sorokSzama + 1], false));
+                        elekSzama++;
+                    }
                 }
             }
             for (int j = 1; j < (csucsokSzama - 2) / sorokSzama + 1; ++j) {

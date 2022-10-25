@@ -10,30 +10,48 @@
 	\tikz[->, csucs/.style={draw, fill=black!10, circle, minimum size={0.6cm}, inner sep=0cm, align=center, scale=0.9},
 	scale=3]
 	{
-		\node [csucs] (a) at (1,0.0) {$a$};
-		\node [csucs] (b) at (2,0.0) {$b$};
-		\node [csucs] (c) at (3,0.0) {$c$};
-		\node [csucs] (s) at (0,0.75) {$s$};
-		\node [csucs] (t) at (4,0.75) {$t$};
-		\node [csucs] (d) at (1,1.5) {$d$};
-		\node [csucs] (e) at (2,1.5) {$e$};
-		\node [csucs] (f) at (3,1.5) {$f$};
+		\node [csucs] (a) at (1,2.4000000000000004) {$a$};
+		\node [csucs] (b) at (2,2.4000000000000004) {$b$};
+		\node [csucs] (c) at (3,2.4000000000000004) {$c$};
+		\node [csucs] (s) at (0,1.6) {$s$};
+		\node [csucs] (d) at (1,1.6) {$d$};
+		\node [csucs] (e) at (2,1.6) {$e$};
+		\node [csucs] (f) at (3,1.6) {$f$};
+		\node [csucs] (t) at (4,1.6) {$t$};
+		\node [csucs] (g) at (1,0.8) {$g$};
+		\node [csucs] (h) at (2,0.8) {$h$};
+		\node [csucs] (i) at (3,0.8) {$i$};
 		
 		\path
 		
-		(a) edge node [above=-2pt, pos=0.5, sloped] {(6)} (b)
-		(b) edge node [above=-2pt, pos=0.5, sloped] {(10)} (c)
+		(a) edge node [above=-2pt, pos=0.5, sloped] {(4)} (b)
+		(b) edge node [above=-2pt, pos=0.5, sloped] {(1)} (c)
 		(s) edge node [above=-2pt, pos=0.5, sloped] {(11)} (a)
-		(c) edge node [above=-2pt, pos=0.5, sloped] {(15)} (t)
-		(a) edge node [above=-2pt, pos=0.5, sloped] {(4)} (e)
-		(a) edge node [above=-2pt, pos=0.5, sloped] {(0)} (f)
-		(b) edge node [above=-2pt, pos=0.5, sloped] {(2)} (e)
-		(f) edge node [above=-2pt, pos=0.5, sloped] {(8)} (c)
-		(d) edge node [above=-2pt, pos=0.5, sloped] {(18)} (e)
-		(e) edge node [above=-2pt, pos=0.5, sloped] {(29)} (f)
-		(s) edge node [above=-2pt, pos=0.5, sloped] {(18)} (d)
-		(f) edge node [above=-2pt, pos=0.5, sloped] {(26)} (t)
-		(s) edge node [above=-2pt, pos=0.5, sloped] {(14)} (e)
+		(c) edge node [above=-2pt, pos=0.5, sloped] {(4)} (t)
+		(s) edge node [above=-2pt, pos=0.5, sloped] {(22)} (b)
+		(b) edge node [above=-2pt, pos=0.5, sloped] {(20)} (t)
+		(d) edge node [above=-2pt, pos=0.5, sloped] {(7)} (a)
+		(a) edge node [above=-2pt, pos=0.5, sloped] {(11)} (e)
+		(b) edge node [above=-2pt, pos=0.5, sloped] {(1)} (d)
+		(e) edge node [above=-2pt, pos=0.5, sloped] {(7)} (b)
+		(b) edge node [above=-2pt, pos=0.5, sloped] {(17)} (f)
+		(d) edge node [above=-2pt, pos=0.5, sloped] {(6)} (c)
+		(e) edge node [above=-2pt, pos=0.5, sloped] {(8)} (c)
+		(c) edge node [above=-2pt, pos=0.5, sloped] {(4)} (f)
+		(s) edge node [above=-2pt, pos=0.5, sloped] {(13)} (d)
+		(d) edge node [above=-2pt, pos=0.5, sloped] {(10)} (e)
+		(e) edge node [above=-2pt, pos=0.5, sloped] {(2)} (f)
+		(f) edge node [above=-2pt, pos=0.5, sloped] {(23)} (t)
+		(i) edge node [above=-2pt, pos=0.5, sloped] {(2)} (d)
+		(g) edge node [above=-2pt, pos=0.5, sloped] {(3)} (e)
+		(e) edge node [above=-2pt, pos=0.5, sloped] {(3)} (i)
+		(f) edge node [above=-2pt, pos=0.5, sloped] {(5)} (i)
+		(g) edge node [above=-2pt, pos=0.5, sloped] {(5)} (h)
+		(h) edge node [above=-2pt, pos=0.5, sloped] {(11)} (i)
+		(s) edge node [above=-2pt, pos=0.5, sloped] {(10)} (g)
+		(i) edge node [above=-2pt, pos=0.5, sloped] {(16)} (t)
+		(s) edge node [above=-2pt, pos=0.5, sloped] {(25)} (h)
+		(h) edge node [above=-2pt, pos=0.5, sloped] {(23)} (t)
 		
 		;}
 \end{center}

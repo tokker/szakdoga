@@ -46,7 +46,7 @@ public class Main {
         }
         graf g2 = null;
         assert graf != null;
-        for(int i = 0; i < 50; ++i){
+        for(int i = 0; i < 1000; ++i){
             graf.vagast_csokkent();
             for (int j = 0; j < graf.elekSzama*1.3; ++j)
                 graf.utat_novel(csucsokSzama, 's', 't');
@@ -117,6 +117,6 @@ public class Main {
         latex.kiir(writer2,sorokSzama, graf, csucsokSzama);
         writer2.close();
         //kezdoFrame k = new kezdoFrame();
-        //testGraphDraw.draw(sorokSzama, graf, csucsokSzama);
+        testGraphDraw.draw(sorokSzama, graf, csucsokSzama);
     }
 }

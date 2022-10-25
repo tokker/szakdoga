@@ -19,13 +19,15 @@ public interface latex {
                 "\t{\n" +
                 "\t\t");
         int sorok = sorokSzama;
-        if(sorokSzama %2 == 0)
+        double osszenyomas = 0.8;
+        if(sorokSzama %2 == 0) {
             ++sorok;
+            osszenyomas = 0.6;
+        }
         for (int i = 0; i < sorok; ++i){
             for(int j = 0; j < (csucsokSzama-2)/sorokSzama + 2; ++j) {
-                if(g.csucsok[i][j] != ' ') {
-                    writer.write("\\node [csucs] (" + g.csucsok[i][j] + ") at (" + j + "," + i * 0.75 + ") {$" + g.csucsok[i][j] + "$};\n\t\t");
-                }
+                if(g.csucsok[i][j] != ' ')
+                    writer.write("\\node [csucs] (" + g.csucsok[i][j] + ") at (" + j + "," + (sorok-i) * osszenyomas + ") {$" + g.csucsok[i][j] + "$};\n\t\t");
             }
         }
         writer.write("\n" +
@@ -33,7 +35,8 @@ public interface latex {
                 "\t\t\n" +
                 "\t\t");
         for(int i = 0; i < g.elekSzama; ++i){
-            writer.write("(" + g.elek.get(i).kezdo + ") edge node [above=-2pt, pos=0.5, sloped] {(" + g.elek.get(i).kapacitas + ")} (" + g.elek.get(i).veg + ")\n\t\t");
+            if(g.elek.get(i).kapacitas != 0)
+                writer.write("(" + g.elek.get(i).kezdo + ") edge node [above=-2pt, pos=0.5, sloped] {(" + g.elek.get(i).kapacitas + ")} (" + g.elek.get(i).veg + ")\n\t\t");
         }
         writer.write("\n" +
                 "\t\t;}\n" +

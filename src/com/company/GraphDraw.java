@@ -69,12 +69,14 @@ public class GraphDraw extends JFrame {
     class edge {
         char x,y;
         int kapacitas,max;
+        boolean vagas;
 
-        public edge(char xx, char yy, int k, int m) {
+        public edge(char xx, char yy, int k, int m, boolean v) {
             x = xx;
             y= yy;
             kapacitas = k;
             max = m;
+            vagas = v;
         }
     }
 
@@ -83,9 +85,9 @@ public class GraphDraw extends JFrame {
         nodes.add(new Node(name,x,y, vagas));
         this.repaint();
     }
-    public void addEdge(char x, char y, int kapacitas, int max) {
+    public void addEdge(char x, char y, int kapacitas, int max, boolean vagas) {
         //add an edge between nodes i and j
-        edges.add(new edge(x,y, kapacitas, max));
+        edges.add(new edge(x,y, kapacitas, max, vagas));
         this.repaint();
     }
 
@@ -106,6 +108,8 @@ public class GraphDraw extends JFrame {
         g.setColor(Color.black);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 15));
         for (edge e : edges) {
+            if(e.vagas && megoldas)
+                g.setColor(Color.orange);
             int i = 0, j = 0;
             for(Node n : nodes) {
                 if (n.name == e.x)
@@ -165,7 +169,8 @@ public class GraphDraw extends JFrame {
                 xkap = x0 + (x1-x0)/2;
                 ykap = y0 + (y1-y0)/2;
             }
-            g.setColor(Color.blue);
+            if(!megoldas || !e.vagas)
+                g.setColor(Color.blue);
             if (megoldas)
                 g.drawString("(" + e.max + ")", xkap, ykap);
             else
@@ -221,8 +226,22 @@ class testGraphDraw {
             }
         }
         for (int i = 0; i < g.elekSzama; ++i) {
-            if(g.elek.get(i).kapacitas != 0)
-                frame.addEdge(g.elek.get(i).kezdo, g.elek.get(i).veg, g.elek.get(i).kapacitas, g.elek.get(i).max);
+            if(g.elek.get(i).kapacitas != 0) {
+                boolean vagas = false;
+                for(int k = 0; k < g.vagasCsucsSzam; ++k){
+                    if (g.vagas[k] == g.elek.get(i).kezdo) {
+                        vagas = true;
+                        break;
+                    }
+                }
+                for(int k = 0; k < g.vagasCsucsSzam; ++k){
+                    if (g.vagas[k] == g.elek.get(i).veg) {
+                        vagas = false;
+                        break;
+                    }
+                }
+                frame.addEdge(g.elek.get(i).kezdo, g.elek.get(i).veg, g.elek.get(i).kapacitas, g.elek.get(i).max, vagas);
+            }
         }
     }
 }
