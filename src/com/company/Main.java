@@ -113,6 +113,10 @@ public class Main {
         }
         writer.write("\nMinimális vágás értéke: " + vagasErtek);
         writer.close();
-        testGraphDraw.draw(sorokSzama, graf, csucsokSzama);
+        BufferedWriter writer2 = new BufferedWriter(new FileWriter("latex.tex"));
+        latex.kiir(writer2,sorokSzama, graf, csucsokSzama);
+        writer2.close();
+        //kezdoFrame k = new kezdoFrame();
+        //testGraphDraw.draw(sorokSzama, graf, csucsokSzama);
     }
 }
