@@ -87,7 +87,7 @@ public interface nehezseg {
         if(hosszuElek > maxHosszuelek)
             maxHosszuelek = hosszuElek;
         nehezseg = ((elekSzama - csucsokSzama - sorokSzama - 2 - nullElek/2)/maxEl*3 + hosszuElek/maxHosszuelek + visszaelNehezseg(maxVisszaElek, visszaElek)*2 + csSzam/20*2 + vagasErosseg/maxVagasErosseg*2) / szoras;
-        System.out.println(nehezseg + " " + (elekSzama - csucsokSzama - sorokSzama - 2 - nullElek/2)/maxEl + " " + hosszuElek/maxHosszuelek + " " + visszaelNehezseg(maxVisszaElek, visszaElek) + " " + vagasErosseg/maxVagasErosseg + " " + szoras);
+        //System.out.println(nehezseg + " " + (elekSzama - csucsokSzama - sorokSzama - 2 - nullElek/2)/maxEl + " " + hosszuElek/maxHosszuelek + " " + visszaelNehezseg(maxVisszaElek, visszaElek) + " " + vagasErosseg/maxVagasErosseg + " " + szoras);
         return nehezseg;
     }
 

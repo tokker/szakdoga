@@ -2,6 +2,7 @@ package com.company;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.*;
 import java.awt.*;
 import javax.swing.*;
@@ -21,7 +22,7 @@ public class GraphDraw extends JFrame {
     ArrayList<Node> nodes;
     ArrayList<edge> edges;
 
-    public GraphDraw() { //Constructor
+    public GraphDraw(int elekSzama, int csucsokSzama, int sorokSzama, graf g, int random, int feladatNehezseg, int vagasCsucsSzam) { //Constructor
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         nodes = new ArrayList<Node>();
         edges = new ArrayList<edge>();
@@ -30,8 +31,11 @@ public class GraphDraw extends JFrame {
         height = 40;
         JButton button = new JButton("Megoldás");
         button.addActionListener(new GombNyomas(this, button));
+        JButton button2 = new JButton("Újragenerálás");
+        button2.addActionListener(new GombNyomas2(elekSzama, csucsokSzama, sorokSzama, g, random, feladatNehezseg, vagasCsucsSzam, this));
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         panel.add(button);
+        panel.add(button2);
         this.getContentPane().add(panel);
     }
 
@@ -51,6 +55,37 @@ public class GraphDraw extends JFrame {
                 button.setText("Feladat");
             else
                 button.setText("Megoldás");
+        }
+    }
+
+    private class GombNyomas2 implements ActionListener {
+        int elekSzama;
+        int csucsokSzama;
+        int sorokSzama;
+        graf graf;
+        int random;
+        int feladatNehezseg;
+        int vagasCsucsSzam;
+        JFrame f;
+
+        public GombNyomas2(int elekSzama, int csucsokSzama, int sorokSzama, graf graf, int random, int feladatNehezseg, int vagasCsucsSzam, JFrame f){
+            this.elekSzama = elekSzama;
+            this.csucsokSzama = csucsokSzama;
+            this.sorokSzama = sorokSzama;
+            this.graf = graf;
+            this.random = random;
+            this.feladatNehezseg = feladatNehezseg;
+            this.vagasCsucsSzam = vagasCsucsSzam;
+            this.f = f;
+        }
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                folyamgeneralas.general(elekSzama, csucsokSzama, sorokSzama, graf, random, feladatNehezseg, vagasCsucsSzam);
+                f.setVisible(false);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 
@@ -198,8 +233,8 @@ public class GraphDraw extends JFrame {
 }
 
 class testGraphDraw {
-    public static void draw(int sorokSzama, graf g, int csucsokSzama) {
-        GraphDraw frame = new GraphDraw();
+    public static void draw(int elekSzama, int csucsokSzama, int sorokSzama, graf g, int random, int feladatNehezseg, int vagasCsucsSzam) {
+        GraphDraw frame = new GraphDraw(elekSzama, csucsokSzama, sorokSzama, g, random, feladatNehezseg, vagasCsucsSzam);
 
         int sorok = sorokSzama;
         if(sorokSzama %2 == 0)
