@@ -46,7 +46,7 @@ public class graf {
     public graf(int csucsokSzama, int sorokSzama){
         rossz = false;
         int sorSzam = sorokSzama;
-        if(csucsokSzama %2 == 0)
+        if(sorokSzama %2 == 0)
             ++sorSzam;
         csucsok = new char[sorSzam][(csucsokSzama - 2)/sorokSzama + 2];
         int szamlalo = 0;

@@ -144,7 +144,7 @@ public class GraphDraw extends JFrame {
         g.setFont(new Font("TimesRoman", Font.PLAIN, 15));
         for (edge e : edges) {
             if(e.vagas && megoldas)
-                g.setColor(Color.orange);
+                g.setColor(Color.magenta);
             int i = 0, j = 0;
             for(Node n : nodes) {
                 if (n.name == e.x)
@@ -219,7 +219,7 @@ public class GraphDraw extends JFrame {
             if(!megoldas || !n.vagas)
                 g.setColor(Color.lightGray);
             else
-                g.setColor(Color.orange);
+                g.setColor(Color.magenta);
             g.fillOval(n.x-nodeWidth/2, n.y-nodeHeight/2,
                     nodeWidth, nodeHeight);
             g.setColor(Color.black);
@@ -235,6 +235,7 @@ public class GraphDraw extends JFrame {
 class testGraphDraw {
     public static void draw(int elekSzama, int csucsokSzama, int sorokSzama, graf g, int random, int feladatNehezseg, int vagasCsucsSzam) {
         GraphDraw frame = new GraphDraw(elekSzama, csucsokSzama, sorokSzama, g, random, feladatNehezseg, vagasCsucsSzam);
+        frame.setResizable(false);
 
         int sorok = sorokSzama;
         if(sorokSzama %2 == 0)

@@ -78,7 +78,6 @@ public interface folyamgeneralas {
         BufferedWriter writer2 = new BufferedWriter(new FileWriter("latex.tex"));
         latex.kiir(writer2,sorokSzama, graf, csucsokSzama);
         writer2.close();
-        //kezdoFrame k = new kezdoFrame();
         testGraphDraw.draw(elekSzama, csucsokSzama, sorokSzama, graf, random, feladatNehezseg, vagasCsucsSzam);
     }
 }
