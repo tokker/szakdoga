@@ -3,27 +3,29 @@ s d e f t
   g h i   
 
 
-a b (2) 0
-b c (14) 14
-s a (8) 8
-c t (11) 9
-s b (16) 14
-a f (12) 8
-e b (4) 0
+a b (24) 21
+b c (32) 28
+s a (21) 21
+c t (37) 36
+d b (3) 3
+f b (5) 4
 d c (6) 6
-c f (12) 11
-s d (13) 9
-d e (15) 15
-e f (20) 19
-f t (32) 28
-g d (13) 12
-h e (6) 4
-f h (12) 10
-g h (2) 2
-h i (25) 21
-s g (17) 14
-i t (23) 21
-s h (13) 13
+f c (5) 2
+s d (15) 12
+d e (7) 3
+e f (6) 6
+f t (5) 4
+i d (1) 0
+g e (14) 11
+e i (8) 8
+f g (1) 0
+h f (6) 4
+g h (7) 7
+h i (8) 5
+s g (20) 18
+i t (15) 13
+s h (10) 10
+h t (11) 8
 
-Minimális vágás: s b d g 
-Minimális vágás értéke: 58
+Minimális vágás: s d e g 
+Minimális vágás értéke: 61

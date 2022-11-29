@@ -16,7 +16,7 @@ public class kezdoFrame extends JFrame {
         elso.setBounds(350, 50, 100, 30);
         f.add(elso);
         JRadioButton r2=new JRadioButton("Fájlból");
-        JRadioButton r1=new JRadioButton("Attribútumok megadásával", true);
+        JRadioButton r1=new JRadioButton("Paraméterek megadásával", true);
         r1.setBounds(200,100,200,30);
         r2.setBounds(450,100,200,30);
         ButtonGroup bg=new ButtonGroup();
