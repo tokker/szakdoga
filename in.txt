@@ -1,21 +1,26 @@
-1
+0
 3
 11
-10
-14
-3
+4
+19
+4
 s a
 s d
-s e
+s h
+s g
 a b
 a d
 b c
-b e
+b t
 c t
-d c
+c e
 d e
 e f
-e t
-f a
+e b
 f t
-s a b
+g h
+g f
+h i
+i t
+i d
+s a d e
