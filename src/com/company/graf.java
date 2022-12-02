@@ -36,10 +36,14 @@ public class graf {
                 else if (i == (sorSzam-1)/2 && sorokSzama %2 == 0)
                     csucsok[i][j] = ' ';
                 else {
-                    if('a' + szamlalo == 's' || 'a' + szamlalo == 't')
+                    if('a' + szamlalo == 's')
+                        szamlalo += 2;
+                    if(szamlalo != 26) {
+                        csucsok[i][j] = (char) ('a' + szamlalo);
                         ++szamlalo;
-                    csucsok[i][j] = (char) ('a' + szamlalo);
-                    ++szamlalo;
+                    }
+                    else
+                        csucsok[i][j] = 'A';
                 }
             }
         }

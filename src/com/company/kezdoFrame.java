@@ -12,8 +12,8 @@ public class kezdoFrame extends JFrame {
     public kezdoFrame() throws IOException {
         f=new JFrame();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JLabel elso = new JLabel("Gráf generálása");
-        elso.setBounds(350, 50, 100, 30);
+        JLabel elso = new JLabel("Hálózat generálása");
+        elso.setBounds(345, 50, 110, 30);
         f.add(elso);
         JRadioButton r2=new JRadioButton("Fájlból");
         JRadioButton r1=new JRadioButton("Paraméterek megadásával", true);
