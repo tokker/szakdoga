@@ -11,10 +11,13 @@ public interface vagas {
         ArrayList<Character> vagas = new ArrayList();
         if(sorokSzama %2 == 0)
             ++sorok;
-        vagas.add('s');
         int vagasSzam = 1;
+        vagas.add('s');
         boolean joVagas = false;
         while (!joVagas) {
+            if (vagasSzam == 2){
+                vagas.remove(1);
+            }
             vagasSzam = 1;
             for (int i = 0; i < sorok; ++i) {
                 for (int j = 0; j < (csucsokSzama - 2) / sorokSzama + 2; ++j) {

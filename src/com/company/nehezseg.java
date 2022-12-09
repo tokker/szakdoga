@@ -35,7 +35,7 @@ public interface nehezseg {
             }
             if(kezdo > veg && g.elek.get(i).kapacitas != 0)
                 visszaElek++;
-            if(abs(kezdo-veg) == 2)
+            if(abs(kezdo-veg) == 2 && g.elek.get(i).kapacitas != 0)
                 hosszuElek++;
 
         }
@@ -74,20 +74,21 @@ public interface nehezseg {
         double maxVagasErosseg = sorokSzama*((csucsokSzama-2)/sorokSzama - 1) * 0.35;
         if(vagasErosseg > maxVagasErosseg)
             maxVagasErosseg = vagasErosseg;
-        double maxVisszaElek = maxEl - (csucsokSzama-2)/sorokSzama*(sorokSzama-1);
+        double maxVisszaElek = maxEl - (csucsokSzama-2)/sorokSzama*(sorokSzama-1) - 4;
         maxEl *= 0.5;
-        if(elekSzama- csucsokSzama - sorokSzama - 2 - nullElek/2 > maxEl)
-            maxEl = elekSzama - csucsokSzama - sorokSzama - 2- nullElek/2;
-        if(nullElek > (elekSzama - csucsokSzama - sorokSzama - 2)/2)
-            nullElek = (elekSzama - csucsokSzama - sorokSzama - 2)/2;
+        if(nullElek > (elekSzama - csucsokSzama - sorokSzama + 2)*2)
+            nullElek = (elekSzama - csucsokSzama - sorokSzama + 2)*2;
+        if(elekSzama- csucsokSzama - sorokSzama + 2 - nullElek/2 > maxEl)
+            maxEl = elekSzama - csucsokSzama - sorokSzama + 2- nullElek/2;
         double csSzam = csucsokSzama;
         if(csSzam > 20)
             csSzam = 20;
         double maxHosszuelek = (4 + ((csucsokSzama-2)/sorokSzama*2-4)* (sorokSzama-1)) * 0.7;
         if(hosszuElek > maxHosszuelek)
             maxHosszuelek = hosszuElek;
-        nehezseg = ((elekSzama - csucsokSzama - sorokSzama - 2 - nullElek/2)/maxEl*3 + hosszuElek/maxHosszuelek + visszaelNehezseg(maxVisszaElek, visszaElek)*2 + csSzam/20*2 + vagasErosseg/maxVagasErosseg*2) / szoras;
-        //System.out.println(nehezseg + " " + (elekSzama - csucsokSzama - sorokSzama - 2 - nullElek/2)/maxEl + " " + hosszuElek/maxHosszuelek + " " + visszaelNehezseg(maxVisszaElek, visszaElek) + " " + vagasErosseg/maxVagasErosseg + " " + szoras);
+        double behuzottElek = elekSzama - csucsokSzama - sorokSzama + 2;
+        nehezseg = ((behuzottElek - nullElek/2)/maxEl*3 + hosszuElek/maxHosszuelek + visszaelNehezseg(maxVisszaElek, visszaElek)*2 + csSzam/20*2 + vagasErosseg/maxVagasErosseg*2) / szoras;
+        System.out.println(maxVisszaElek + " " + nehezseg + " " + hosszuElek + " " + (behuzottElek - nullElek/2)/maxEl + " " + hosszuElek/maxHosszuelek + " " + visszaelNehezseg(maxVisszaElek, visszaElek) + " " + vagasErosseg/maxVagasErosseg + " " + szoras);
         return nehezseg;
     }
 
@@ -96,7 +97,7 @@ public interface nehezseg {
         int csucsSorban = (csucsokSzama-2)/sorokSzama;
         maxel += csucsSorban * (sorokSzama-1);
         if(csucsSorban > 1)
-            maxel += (csucsSorban*2-2) * (sorokSzama-1);
+            maxel += (csucsSorban*2-2) * (sorokSzama-1) + 4;
         if(csucsSorban > 2)
             maxel += (csucsSorban*2-4) * (sorokSzama-1);
         return maxel;
